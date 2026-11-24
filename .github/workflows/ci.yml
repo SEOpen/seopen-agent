@@ -1,0 +1,45 @@
+name: CI
+
+# The skills test on every push to main, every pull request and by hand. It checks each skill's
+# frontmatter and that every tool a skill names exists in SEOpen's MCP server, which lives in the app
+# repo, SEOpen/seopen. So CI checks that repo out next to this one and points SEOPEN_DIR at it.
+#
+# While SEOpen/seopen is private, the secret SEOPEN_READ_TOKEN (a fine-grained token, resource owner
+# SEOpen, repository seopen only, Contents read) lets the checkout read it. Once it is public the
+# secret can go; the checkout falls back to this workflow's own token, which reads public repos.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  skills:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
+      - name: Check out SEOpen/seopen
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
+        with:
+          repository: SEOpen/seopen
+          path: .seopen
+          token: ${{ secrets.SEOPEN_READ_TOKEN || github.token }}
+          sparse-checkout: src/lib/mcp
+      # No version: it reads packageManager (pnpm@9.15.9) from package.json.
+      - uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320 # v4.4.0
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm test
+        env:
+          SEOPEN_DIR: .seopen

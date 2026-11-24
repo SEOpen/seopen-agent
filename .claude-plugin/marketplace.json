@@ -1,0 +1,13 @@
+{
+  "name": "seopen",
+  "owner": { "name": "SEOpen", "url": "https://getseopen.com" },
+  "description": "SEOpen's plugin for AI coding agents.",
+  "plugins": [
+    {
+      "name": "seopen",
+      "source": "./plugins/seopen",
+      "description": "Fix what's hurting your site's search traffic from your own repo, then see whether it worked in Search Console. Also competitor teardowns, keyword gaps, link prospects, local and AI visibility audits, client reports and pre-deploy checks.",
+      "category": "SEO"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "seopen": {
+      "url": "https://app.getseopen.com/api/mcp",
+      "extensions": {
+        "com.openai": {
+          "auth": { "type": "oauth", "client": { "mode": "dcr" } }
+        }
+      }
+    }
+  }
+}

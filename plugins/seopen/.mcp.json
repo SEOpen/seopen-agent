@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "seopen": {
+      "type": "http",
+      "url": "https://app.getseopen.com/api/mcp"
+    }
+  }
+}
