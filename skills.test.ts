@@ -223,4 +223,19 @@ describe("plugin manifests", () => {
     expect(entry.remotes).toEqual([{ type: "streamable-http", url: read(".mcp.json").mcpServers.seopen.url }]);
     expect(entry.repository.url).toBe(claude.repository);
   });
+
+  it("gives Gemini CLI the same server and version, with sign-in left to OAuth", () => {
+    const gemini = JSON.parse(readFileSync(path.join(root, "gemini-extension.json"), "utf8"));
+    expect(gemini.name).toBe(claude.name);
+    expect(gemini.version, "bump gemini-extension.json with the manifests").toBe(claude.version);
+    expect(gemini.mcpServers).toEqual({ seopen: { httpUrl: read(".mcp.json").mcpServers.seopen.url } });
+  });
+
+  it("has the review cases OpenAI's directory takes, naming only tools the server registers", () => {
+    const { positive, negative } = JSON.parse(readFileSync(path.join(root, "openai/review.json"), "utf8")).test_cases;
+    expect(positive).toHaveLength(5);
+    expect(negative).toHaveLength(3);
+    const tools = registeredTools(MCP_DIR);
+    for (const c of positive) for (const name of c.tools_triggered.split(", ")) expect(tools, c.description).toContain(name);
+  });
 });
