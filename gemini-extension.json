@@ -1,0 +1,8 @@
+{
+  "name": "seopen",
+  "version": "0.6.0",
+  "description": "SEO data for agents: Search Console, rankings, site audits, AI visibility, backlinks and fixes.",
+  "mcpServers": {
+    "seopen": { "httpUrl": "https://app.getseopen.com/api/mcp" }
+  }
+}
