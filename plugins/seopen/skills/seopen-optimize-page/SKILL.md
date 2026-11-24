@@ -48,7 +48,7 @@ Then check what's already open on it. Call `list_fixes` with `url_contains` set 
   - `owned_by` on a search: another page of the site leads for it. Leave it out of this page; working it in makes the two pages compete.
   - `page_text.from`: `crawl` means the live page couldn't be fetched and only the title and H1 were read, so a search the body covers may show as missing. Read the page in the repo to check.
   - `basics` and `checklist`: the tasks, each with the data behind it.
-  - `questions`: People also ask for the main search. Free when saved. If `questions.state` is `needs_approval`, show the price and ask. Skip it if the user says no; the rest stands. A question with `fits_page: false` belongs to another page.
+  - `questions`: People also ask for the main search. Free when saved. If `questions.state` is `needs_approval`, show the price and ask. If it is `untracked`, none of the page's searches is tracked: show `main_search`, ask which search to look up, and call again with the one the user names as `keyword`, which quotes it. Skip it if the user says no; the rest stands. A question with `fits_page: false` belongs to another page.
 
 Read `history` in the Search Console answer. With `under_90_days: true`, say the searches rest on few days of data and keep the edit small.
 

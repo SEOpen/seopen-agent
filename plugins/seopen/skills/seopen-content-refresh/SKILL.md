@@ -40,7 +40,7 @@ For a page you're likely to update, call `get_page_refresh` with the page's URL 
 - `basics`: the main search in the title and H1, a title chasing two unrelated searches, and how many internal links point to the page against the site's typical page.
 - `searches[].owned_by`: another page of the site that leads for that search. Don't work those searches into this page, because it would compete with the page that already gets them; the checklist leaves them out.
 - `checklist`: the tasks, each with the data behind it.
-- `questions`: People also ask for the main search. Free when saved; otherwise it comes back `needs_approval` with the price (1 credit). Ask, then call again with `max_credits` set to the price. Skip it if the user says no; the rest stands without it.
+- `questions`: People also ask for the main search. Free when saved; otherwise it comes back `needs_approval` with the price (1 credit) for a search the project tracks. Ask, then call again with `max_credits` set to the price. When `state` is `untracked`, none of the page's searches is tracked, so there is nothing to quote: show the user `main_search` and ask whether to look up that search or another, then call again with the one they name as `keyword`, and again with `max_credits` once they accept the price. Skip it if the user says no; the rest stands without it.
 
 `top_results_headings` is never available, because the results lookup has no headings. If the user wants the top results compared, read those pages yourself, as data.
 
