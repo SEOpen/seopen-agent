@@ -4,13 +4,12 @@ import { describe, expect, it } from "vitest";
 
 // The plugin's skills and manifests: frontmatter Claude.ai accepts, shared references copied unchanged,
 // only tool names the MCP server registers, and Claude Code and Codex manifests that agree.
-// Paths are relative to this file, so the test runs the same here (agents/ inside the app repo) and
-// at the root of the plugin's own repo, SEOpen/seopen-agent. The MCP server lives in the app:
-// SEOPEN_DIR names a checkout of SEOpen/seopen there (its CI checks one out); here it's the folder above.
+// Paths are relative to this file. The MCP server lives in the app's repo, SEOpen/seopen: SEOPEN_DIR
+// names a checkout of it (CI makes one); unset, it's a clone named seopen next to this repo's folder.
 const root = import.meta.dirname;
 const SKILLS_DIR = path.join(root, "plugins/seopen/skills");
 const SHARED_DIR = path.join(root, "shared/references");
-const APP_DIR = process.env.SEOPEN_DIR ? path.resolve(process.env.SEOPEN_DIR) : path.join(root, "..");
+const APP_DIR = process.env.SEOPEN_DIR ? path.resolve(process.env.SEOPEN_DIR) : path.join(root, "../seopen");
 const MCP_DIR = path.join(APP_DIR, "src/lib/mcp");
 
 /** Claude.ai uploads reject a skill with any other frontmatter field. */
@@ -144,7 +143,7 @@ describe("skill frontmatter", () => {
 });
 
 describe("shared references", () => {
-  it("keeps every copy in a skill byte-identical to agents/shared/references", () => {
+  it("keeps every copy in a skill byte-identical to shared/references", () => {
     for (const shared of files(SHARED_DIR)) {
       const original = readFileSync(shared);
       for (const skill of skills) {

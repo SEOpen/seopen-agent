@@ -2,11 +2,7 @@ name: CI
 
 # The skills test on every push to main, every pull request and by hand. It checks each skill's
 # frontmatter and that every tool a skill names exists in SEOpen's MCP server, which lives in the app
-# repo, SEOpen/seopen. So CI checks that repo out next to this one and points SEOPEN_DIR at it.
-#
-# While SEOpen/seopen is private, the secret SEOPEN_READ_TOKEN (a fine-grained token, resource owner
-# SEOpen, repository seopen only, Contents read) lets the checkout read it. Once it is public the
-# secret can go; the checkout falls back to this workflow's own token, which reads public repos.
+# repo, SEOpen/seopen. So CI checks that repo out inside this one and points SEOPEN_DIR at it.
 on:
   push:
     branches: [main]
@@ -31,7 +27,6 @@ jobs:
         with:
           repository: SEOpen/seopen
           path: .seopen
-          token: ${{ secrets.SEOPEN_READ_TOKEN || github.token }}
           sparse-checkout: src/lib/mcp
       # No version: it reads packageManager (pnpm@9.15.9) from package.json.
       - uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320 # v4.4.0
