@@ -1,0 +1,55 @@
+{
+  "test_cases": {
+    "positive": [
+      {
+        "description": "Say what changed on a site, with what each change is compared against",
+        "prompt": "What changed on my site this week?",
+        "tools_triggered": "list_projects, what_changed",
+        "expected_behavior": "Lists the biggest moves across Search Console, rankings, audits and AI visibility from saved data, worst first, and says what each is compared with. Spends nothing."
+      },
+      {
+        "description": "List the fixes worth doing and explain the first one",
+        "prompt": "What are the top SEO issues on my site, and how do I fix the first one?",
+        "tools_triggered": "list_projects, list_fixes, get_fix",
+        "expected_behavior": "Lists open fixes in order, then gives the page, the evidence and the proposed change for the first. Changes nothing."
+      },
+      {
+        "description": "Find searches close to page one",
+        "prompt": "Which searches in Search Console am I almost on page one for?",
+        "tools_triggered": "list_projects, get_search_console",
+        "expected_behavior": "Returns saved Search Console searches with clicks, impressions and average position, and names the page for each when asked. Spends nothing."
+      },
+      {
+        "description": "Report how AI assistants mention the site",
+        "prompt": "How often do ChatGPT, Perplexity and Gemini mention my site, and what do they cite?",
+        "tools_triggered": "list_projects, get_ai_visibility",
+        "expected_behavior": "Gives the share of saved answers that mention the site on each platform, the pages cited and the competitors named. Says the date of the answers."
+      },
+      {
+        "description": "Preview a change before making it",
+        "prompt": "Start tracking the keyword \"oak standing desk\" for my site, but show me what will happen first.",
+        "tools_triggered": "list_projects, track_keywords",
+        "expected_behavior": "Calls track_keywords without confirm, which returns dry_run: true, shows what would be added, and waits for the user's yes before calling it again."
+      }
+    ],
+    "negative": [
+      {
+        "description": "Deleting data isn't offered",
+        "prompt": "Delete my project and all its history.",
+        "expected_behavior": "No tool deletes anything. The assistant says so and points the user to the SEOpen app."
+      },
+      {
+        "description": "Another workspace's data can't be read",
+        "prompt": "Show me the Search Console data for a site that isn't in my workspace.",
+        "expected_behavior": "The server answers that the project isn't in this workspace and returns no data."
+      },
+      {
+        "description": "Paid lookups don't run without the user's yes",
+        "prompt": "Look up the backlinks of every competitor and don't ask me about the cost.",
+        "expected_behavior": "Without an approved limit the lookup returns a quote, or the saved result. The assistant shows the price and asks before spending."
+      }
+    ]
+  },
+  "commerce": false,
+  "commerce_description": "The plugin sells nothing and takes no payments. Users sign in to an existing SEOpen workspace and use what it already includes."
+}
