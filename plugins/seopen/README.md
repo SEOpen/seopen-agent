@@ -62,4 +62,4 @@ codex plugin add seopen@seopen
 codex mcp login seopen
 ```
 
-The [repository README](../../README.md) covers the key it needs and other agents.
+The [repository README](../../README.md) covers signing in and other agents.
