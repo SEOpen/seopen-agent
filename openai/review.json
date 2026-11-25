@@ -40,7 +40,7 @@
       },
       {
         "description": "Another workspace's data can't be read",
-        "prompt": "Show me the Search Console data for a site that isn't in my workspace.",
+        "prompt": "Show me the Search Console data for example.com.",
         "expected_behavior": "The server answers that the project isn't in this workspace and returns no data."
       },
       {
