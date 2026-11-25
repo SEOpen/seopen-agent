@@ -1,0 +1,14 @@
+{
+  "name": "seopen",
+  "version": "0.6.0",
+  "description": "Fix what's hurting your site's search traffic from your own repo, write and improve pages, add internal links and get pages indexed, then see whether it worked in Search Console. Runs on a schedule if you want, one pull request at a time. Also competitor teardowns, keyword gaps, link prospects, local and AI visibility audits, client reports and pre-deploy checks.",
+  "author": { "name": "SEOpen", "url": "https://getseopen.com" },
+  "homepage": "https://getseopen.com",
+  "icon": "./assets/icon.png",
+  "documentationUrl": "https://getseopen.com/docs/agents/plugin",
+  "privacyPolicyUrl": "https://getseopen.com/privacy",
+  "termsOfServiceUrl": "https://getseopen.com/terms",
+  "repository": "https://github.com/SEOpen/seopen-agent",
+  "license": "MIT",
+  "keywords": ["seo", "search-console", "site-audit", "rank-tracking", "keyword-research", "content-writing", "internal-links", "indexing", "site-migration", "competitor-analysis", "link-building", "local-seo", "ai-visibility", "nextjs", "astro", "sveltekit"]
+}
