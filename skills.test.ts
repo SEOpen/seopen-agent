@@ -1,6 +1,7 @@
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
+import { build, OUT } from "./scripts/claude-directory.mjs";
 
 // The plugin's skills and manifests: frontmatter Claude.ai accepts, shared references copied unchanged,
 // only tool names the MCP server registers, and Claude Code and Codex manifests that agree.
@@ -237,5 +238,35 @@ describe("plugin manifests", () => {
     expect(negative).toHaveLength(3);
     const tools = registeredTools(MCP_DIR);
     for (const c of positive) for (const name of c.tools_triggered.split(", ")) expect(tools, c.description).toContain(name);
+  });
+});
+
+describe("the copy for Claude's plugin directory", () => {
+  const copy = build();
+
+  it("is current: run node scripts/claude-directory.mjs after changing a skill", () => {
+    const onDisk = readdirSync(OUT, { recursive: true, withFileTypes: true }).filter((e) => e.isFile() && e.name !== ".DS_Store").map((e) => path.relative(OUT, path.join(e.parentPath, e.name)));
+    expect(onDisk.sort()).toEqual([...copy.keys()].sort());
+    for (const [file, contents] of copy) expect(readFileSync(path.join(OUT, file)).equals(contents), file).toBe(true);
+  });
+
+  it("holds only files the directory takes from any organization, and no scripts", () => {
+    for (const [file, contents] of copy) {
+      expect(file, "a file type the directory refuses").toMatch(/(?:\.(?:md|json|png)|^LICENSE)$/);
+      expect(contents.subarray(0, 2).toString(), file).not.toBe("#!");
+    }
+  });
+
+  it("reads no key and points at no script or missing file", () => {
+    for (const [file, contents] of copy) {
+      if (!file.endsWith(".md")) continue;
+      const text = contents.toString();
+      expect(text, file).not.toMatch(/SEOPEN_API_KEY|scripts\/|\.sh\b|link-graph|the script\b|\bpass `/i);
+      for (const [, target] of text.matchAll(/\]\((references\/[^)#]+)\)/g)) expect(copy.has(path.posix.join(path.posix.dirname(file), target)), `${file} links to ${target}`).toBe(true);
+    }
+  });
+
+  it("keeps every skill, under the same name", () => {
+    for (const skill of skills) expect(frontmatter(copy.get(`skills/${skill}/SKILL.md`)!.toString())?.name).toBe(skill);
   });
 });
