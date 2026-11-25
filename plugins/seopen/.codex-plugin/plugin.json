@@ -12,7 +12,7 @@
   "interface": {
     "displayName": "SEOpen",
     "shortDescription": "Fix and grow search traffic",
-    "longDescription": "SEOpen's skills work in your site's repository. They fix what's hurting your search traffic, write and improve pages, add internal links and get pages indexed, then record each change so SEOpen checks it reached the live site and measures it in Search Console at 7, 14 and 28 days. Autopilot can run it on a schedule, one pull request at a time. Also competitor teardowns, keyword research and gaps, link prospects, local and AI visibility audits, client reports and pre-deploy checks. Signs in to your SEOpen workspace with OAuth. Paid lookups are quoted before anything is spent, and every change is previewed first.",
+    "longDescription": "SEOpen's skills work in your site's repository. They fix what's hurting your search traffic, write and improve pages, add internal links and get pages indexed, then record each change so SEOpen checks it reached the live site and measures it in Search Console at 7, 14 and 28 days. Autopilot can run it on a schedule, one pull request at a time. Also competitor teardowns, keyword research and gaps, link prospects, local and AI visibility audits, client reports and pre-deploy checks. Signs in to your SEOpen workspace with OAuth. Every change is previewed first.",
     "developerName": "SEOpen",
     "category": "Developer Tools",
     "capabilities": ["Read", "Write"],
