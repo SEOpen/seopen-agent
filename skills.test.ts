@@ -244,6 +244,12 @@ describe("plugin manifests", () => {
 describe("the copy for Claude's plugin directory", () => {
   const copy = build();
 
+  it("names SEOpen and its support page, which the directory otherwise guesses", () => {
+    const manifest = JSON.parse(readFileSync(path.join(OUT, ".claude-plugin/plugin.json"), "utf8"));
+    expect(manifest.displayName).toBe("SEOpen");
+    expect(manifest.supportUrl).toBe("https://getseopen.com/docs/agents/plugin");
+  });
+
   it("is current: run node scripts/claude-directory.mjs after changing a skill", () => {
     const onDisk = readdirSync(OUT, { recursive: true, withFileTypes: true }).filter((e) => e.isFile() && e.name !== ".DS_Store").map((e) => path.relative(OUT, path.join(e.parentPath, e.name)));
     expect(onDisk.sort()).toEqual([...copy.keys()].sort());
