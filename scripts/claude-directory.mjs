@@ -35,6 +35,10 @@ function swapSection(text, heading, nextHeading, body) {
 const EDITS = {
   "README.md": () => override("README.md"),
 
+  // The directory shows "Seopen" without a display name, and reads the support link from the README without one.
+  ".claude-plugin/plugin.json": (t) =>
+    swap(t, '  "name": "seopen",\n', '  "name": "seopen",\n  "displayName": "SEOpen",\n  "supportUrl": "https://getseopen.com/docs/agents/plugin",\n'),
+
   "skills/seopen-internal-links/SKILL.md": (t) => {
     t = swap(t, "Needs the SEOpen MCP server, git, Node 18 or later, and the site's source code.", "Needs the SEOpen MCP server, git, and the site's source code.");
     t = swap(t, "Links there sit on every page and the script counts them apart.", "Links there sit on every page, so count them apart.");
@@ -111,7 +115,7 @@ export function build() {
     const full = path.join(entry.parentPath, entry.name);
     const file = path.relative(SOURCE, full).split(path.sep).join("/");
     if (LEFT_OUT.some((re) => re.test(file))) continue;
-    if (!file.endsWith(".md")) {
+    if (!file.endsWith(".md") && !EDITS[file]) {
       out.set(file, readFileSync(full));
       continue;
     }

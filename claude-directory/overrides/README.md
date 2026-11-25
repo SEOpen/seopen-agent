@@ -64,4 +64,6 @@ SEOpen's [privacy policy](https://getseopen.com/privacy) covers what the server 
 
 ## Help
 
-Docs: https://getseopen.com/docs/agents/plugin. Support: hello@getseopen.com. Source: https://github.com/SEOpen/seopen-agent.
+- Docs: https://getseopen.com/docs/agents/plugin
+- Support: hello@getseopen.com
+- Source: https://github.com/SEOpen/seopen-agent
