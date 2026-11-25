@@ -141,6 +141,13 @@ describe("skill frontmatter", () => {
       expect(fm!.name, `${skill}: name`).toBe(skill);
     }
   });
+
+  it("quotes any value that holds a colon and a space or a space and a #, which break YAML", () => {
+    for (const skill of skills) {
+      const [, block] = /^---\n([\s\S]*?)\n---\n/.exec(readFileSync(skillFile(skill), "utf8"))!;
+      for (const line of block.split("\n")) expect(line, `${skill}: quote this value`).not.toMatch(/^[a-z-]+: (?!["']).*(?:: | #)/);
+    }
+  });
 });
 
 describe("shared references", () => {

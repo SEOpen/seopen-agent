@@ -1,6 +1,6 @@
 ---
 name: seopen-keyword-clusters
-description: Group a list of keywords into topics that one page each can rank for, using meaning and intent first and SEOpen's live Google results only to settle close calls, then map each group to a page and save the groups as lists. Costs little: close calls cost 1 research credit per keyword checked, quoted first. Use when the user asks to cluster keywords, group keywords, plan pages from a keyword list, build a content map, a topic cluster or hub and spoke pages.
+description: "Group a list of keywords into topics that one page each can rank for, using meaning and intent first and SEOpen's live Google results only to settle close calls, then map each group to a page and save the groups as lists. Costs little: close calls cost 1 research credit per keyword checked, quoted first. Use when the user asks to cluster keywords, group keywords, plan pages from a keyword list, build a content map, a topic cluster or hub and spoke pages."
 license: MIT
 compatibility: Needs the SEOpen MCP server. Checking Google results needs a key made with "Can spend research credits"; saving lists needs "Can make changes".
 ---

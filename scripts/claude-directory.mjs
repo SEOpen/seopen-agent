@@ -101,10 +101,9 @@ const EDITS = {
   },
 };
 
-/** Prose the check reads as the pass command, and a frontmatter value that holds ": ", which YAML takes as a key. */
+/** Prose the check reads as the pass command. */
 function everySkill(text) {
-  text = text.replace(/\b([Pp])ass `/g, (_, p) => (p === "P" ? "Send `" : "send `"));
-  return text.replace(/^(description|compatibility): (.*: .*)$/gm, (_, key, value) => `${key}: ${JSON.stringify(value)}`);
+  return text.replace(/\b([Pp])ass `/g, (_, p) => (p === "P" ? "Send `" : "send `"));
 }
 
 /** Every file of the copy: relative path to contents. */
